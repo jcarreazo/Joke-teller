@@ -10,10 +10,9 @@ var _VoiceRSS = _interopRequireDefault(require("./VoiceRSS.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var button = document.getElementById('button');
-var audioElement = document.getElementById('audio');
-var jokeSource;
+var audioElement = document.getElementById('audio'); //the play function
 
-function test(apikey, word) {
+function playAudio(apikey, word) {
   try {
     _VoiceRSS["default"].speech({
       key: apikey,
@@ -28,6 +27,11 @@ function test(apikey, word) {
   } catch (error) {
     console.log(error);
   }
+} // Toggle the audio reproduction
+
+
+function toggleAudio() {
+  button.disabled = !button.disabled;
 } // Get jokes fetching from the API
 
 
@@ -55,27 +59,34 @@ function getJokes() {
             joke = "".concat(data.setup, " ... ").concat(data.delivery);
           } else {
             joke = data.joke;
-          }
+          } //play the joke
 
-          test("ebe27db905e44cbe92e4e55695e1bff1", joke);
-          _context.next = 17;
+
+          playAudio("ebe27db905e44cbe92e4e55695e1bff1", joke); // disabling the button
+
+          toggleAudio();
+          _context.next = 18;
           break;
 
-        case 13:
-          _context.prev = 13;
+        case 14:
+          _context.prev = 14;
           _context.t0 = _context["catch"](2);
           //Catch error
           e = new Error(_context.t0);
           console.log(e);
 
-        case 17:
+        case 18:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[2, 13]]);
-}
+  }, null, null, [[2, 14]]);
+} //Events
 
-getJokes();
+
+button.addEventListener("click", function () {
+  return getJokes();
+});
+audioElement.addEventListener("ended", toggleAudio);
 var _default = audioElement;
 exports["default"] = _default;

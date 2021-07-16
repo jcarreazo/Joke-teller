@@ -11,7 +11,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background: url("/robot.gif") no-repeat;
+  background: url("https://seguchatbot.com/wp-content/uploads/2020/11/231a7b66c5080ccb37407be02999ac2b.gif") no-repeat;
   background-size: contain;
   background-position: left center;
 }
@@ -46,6 +46,7 @@ body {
     margin-top: 15rem;
   }
   .container__button {
+    margin-bottom: 5rem;
     box-shadow: 5px 5px 30px 20px rgba(0, 0, 0, 0.2);
   }
 }

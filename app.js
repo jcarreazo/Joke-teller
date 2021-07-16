@@ -1,8 +1,9 @@
 import VoiceRSS from "./VoiceRSS.js";
 const button = document.getElementById('button');
-const audioElement = document.getElementById('audio')
-var jokeSource;
-function test(apikey,word) {
+const audioElement = document.getElementById('audio');
+
+//the play function
+function playAudio(apikey,word) {
     try {
         VoiceRSS.speech({
             key: apikey,
@@ -20,6 +21,11 @@ function test(apikey,word) {
 }
 
 
+// Toggle the audio reproduction
+function toggleAudio(){
+    button.disabled=!button.disabled;
+}
+
 // Get jokes fetching from the API
 
 async function getJokes() {
@@ -33,7 +39,10 @@ async function getJokes() {
         } else {
             joke = data.joke;
         }
-        test("ebe27db905e44cbe92e4e55695e1bff1",joke);
+        //play the joke
+        playAudio("ebe27db905e44cbe92e4e55695e1bff1",joke);
+        // disabling the button
+        toggleAudio();
     } catch (error) {
         //Catch error
         const e = new Error(error);
@@ -41,6 +50,9 @@ async function getJokes() {
 
     }
 }
-getJokes();
+
+//Events
+button.addEventListener("click", ()=>getJokes());
+audioElement.addEventListener("ended",toggleAudio);
 
 export default audioElement;
